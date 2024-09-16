@@ -16,7 +16,6 @@ and OpenAI accounts to obtain API keys.
 
 Backend Setup (Node.js)
 -
--
 
 Install Node.js
 -
