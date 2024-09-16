@@ -32,34 +32,34 @@ You should see the version numbers for both Node.js and npm (Node Package Manage
 - Sign up or log in to [OpenAI](https://openai.com/).
 - Get your API key.
 - Create a `.env` file in the root of your backend project directory and add the OpenAI API key:
-OPENAI_API_KEY=your_openai_api_key
+`OPENAI_API_KEY=your_openai_api_key`
 
 
 ### 4. Create Backend Directory
 - Open Command Prompt or PowerShell.
 - Create a project folder for the backend (e.g., audio-qa-backend):
-mkdir audio-qa-backend cd audio-qa-backend
+`mkdir audio-qa-backend cd audio-qa-backend`
 
 
 ### 5. Install Required Packages
 - In the backend directory, create the `server.js` file and paste your Node.js code in it.
 - Run the following command to initialize your Node.js project:
-npm init -y
+`npm init -y`
 
 - Now install the required dependencies:
-npm install express cors body-parser @google-cloud/speech mic openai dotenv
+`npm install express cors body-parser @google-cloud/speech mic openai dotenv`
 
 
 
 ### 6. Run the Backend Server
 - To start the backend server, run:
-node server.js
+`node server.js`
 
 The server will run on port 5000 (or the port specified in your `.env` file).
 
 ### 7. Testing Backend (Optional)
 - You can use tools like Postman or curl to test the `/transcribe` endpoint. For example:
-curl -X POST http://localhost:5000/transcribe
+`curl -X POST http://localhost:5000/transcribe`
 
 
 ---
@@ -70,12 +70,12 @@ curl -X POST http://localhost:5000/transcribe
 - Open Command Prompt or PowerShell.
 - Navigate to the parent directory where you want to create the frontend.
 - Run the following command to create a React app:
-npx create-react-app audio-qa-frontend cd audio-qa-frontend
+`npx create-react-app audio-qa-frontend cd audio-qa-frontend`
 
 
 ### 2. Add Dependencies
 - Install axios to make HTTP requests:
-npm install axios
+`npm install axios`
 
 
 ### 3. Update `App.js`
@@ -88,7 +88,7 @@ npm install axios
 
 ### 5. Run React App
 - To start the React development server, run:
-npm start
+`npm start`
 
 The React app will run at `http://localhost:3000` by default. You can access it via your web browser.
 
