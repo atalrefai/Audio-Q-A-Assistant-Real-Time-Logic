@@ -103,3 +103,6 @@ The React app will run at `http://localhost:3000` by default. You can access it 
 ### Troubleshooting
 - If you encounter any issues with microphone permissions, ensure that the browser has access to the microphone.
 - Check for console errors in the browser and in the backend terminal to debug any issues.
+
+Please view license and my contact
+[License](./LICENSE)
