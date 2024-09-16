@@ -9,10 +9,10 @@ Backend Setup (Node.js)
 Download Node.js from Node.js Official Website.
 Follow the installation instructions for Windows.
 Verify installation by opening Command Prompt and running:
-bash
-Copy code
+
 node -v
 npm -v
+-
 You should see the version numbers for both Node.js and npm (Node Package Manager).
 2. Set Up Google Cloud Speech-to-Text API
 Sign up or log in to the Google Cloud Console.
