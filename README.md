@@ -1,161 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audio Q&A Assistant</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .App {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 400px;
-            text-align: center;
-        }
-        button {
-            padding: 10px 20px;
-            margin: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
-        button:not(:disabled) {
-            background-color: #007bff;
-            color: white;
-        }
-        audio {
-            margin-top: 20px;
-        }
-        h2 {
-            margin-top: 20px;
-        }
-        p {
-            font-size: 1rem;
-            text-align: left;
-        }
-        .loading {
-            font-style: italic;
-            color: #888;
-        }
-    </style>
-</head>
-<body>
-    <div class="App">
-        <h1>Audio Q&A Assistant</h1>
+full step-by-step guide for installing and running the Node.js backend (server.js) and React frontend (app.js) code on a Windows machine.
 
-        <!-- Button controls for starting and stopping the audio recording -->
-        <div>
-            <button id="startRecordingBtn">Start Recording</button>
-            <button id="stopRecordingBtn" disabled>Stop Recording</button>
-        </div>
+Prerequisites:
+Node.js installed on your machine. Download it from here and install it.
+Git installed on your machine (optional for cloning repositories). Download it from here.
+Google Cloud and OpenAI accounts to obtain API keys.
+Backend Setup (Node.js)
+1. Install Node.js
+Download Node.js from Node.js Official Website.
+Follow the installation instructions for Windows.
+Verify installation by opening Command Prompt and running:
+bash
+Copy code
+node -v
+npm -v
+You should see the version numbers for both Node.js and npm (Node Package Manager).
+2. Set Up Google Cloud Speech-to-Text API
+Sign up or log in to the Google Cloud Console.
+Create a new project or use an existing project.
+Enable the Speech-to-Text API.
+Create a service account key:
+Navigate to IAM & Admin > Service Accounts.
+Create a new service account.
+Under "Keys," click "Add Key" and create a new JSON key.
+Download this JSON file and save it to the project directory (same folder as server.js).
+Rename the file to something easy, like (xxxxxxxxxxxxxxxxxxxxxxxxxx.json) (ensure it matches the name in server.js).
+3. Set Up OpenAI API
+Sign up or log in to OpenAI.
+Get your API key.
+Create a .env file in the root of your backend project directory and add the OpenAI API key:
+OPENAI_API_KEY=your_openai_api_key
+ Create Backend Directory
+Open Command Prompt or PowerShell.
+Create a project folder for the backend (e.g., audio-qa-backend):
+mkdir audio-qa-backend
+cd audio-qa-backend
 
-        <!-- Display the recorded audio as a playable audio element -->
-        <audio id="audioPlayback" controls="controls" style="display:none;"></audio>
+mkdir audio-qa-backend
+cd audio-qa-backend
 
-        <!-- Display loading message while transcription and AI processing is happening -->
-        <p id="loadingMessage" class="loading" style="display:none;">Loading, please wait...</p>
+Install Required Packages
+In the backend directory, create the server.js file and paste your Node.js code in it.
+Run the following command to initialize your Node.js project:
+npm init -y
+Now install the required dependencies:
+npm install express cors body-parser @google-cloud/speech mic openai dotenv
+6. Run the Backend Server
+To start the backend server, run:
+node server.js
+The server will run on port 5000 (or the port specified in your .env file).
+7. Testing Backend (Optional)
+You can use tools like Postman or curl to test the /transcribe endpoint. For example
+curl -X POST http://localhost:5000/transcribe
+------------------------------------------------------------------------------------
 
-        <!-- Display the transcription result if available -->
-        <div id="transcriptionResult" style="display:none;">
-            <h2>Transcription</h2>
-            <p id="transcriptionText"></p>
-        </div>
 
-        <!-- Display the AI-generated answer if available -->
-        <div id="answerResult" style="display:none;">
-            <h2>Suggested Answer</h2>
-            <p id="answerText"></p>
-        </div>
-    </div>
 
-    <script>
-        const startRecordingBtn = document.getElementById('startRecordingBtn');
-        const stopRecordingBtn = document.getElementById('stopRecordingBtn');
-        const audioPlayback = document.getElementById('audioPlayback');
-        const loadingMessage = document.getElementById('loadingMessage');
-        const transcriptionResult = document.getElementById('transcriptionResult');
-        const transcriptionText = document.getElementById('transcriptionText');
-        const answerResult = document.getElementById('answerResult');
-        const answerText = document.getElementById('answerText');
+Frontend Setup (React)
 
-        let mediaRecorder;
-        let audioChunks = [];
+1. Install React
+Open Command Prompt or PowerShell.
+Navigate to the parent directory where you want to create the frontend.
+Run the following command to create a React app:
+npx create-react-app audio-qa-frontend
+cd audio-qa-frontend
+2. Add Dependencies
+Install axios to make HTTP requests:
+npm install axios
+3. Update App.js
+Replace the default App.js code with the React code provided above.
+4. Update the Proxy for Development
+To avoid CORS issues during development, modify the package.json file of your React project to include a proxy for your backend:
+"proxy": "http://localhost:5000"
+5. Run React App
+To start the React development server, run:
+npm start
+The React app will run at http://localhost:3000 by default. You can access it via your web browser.
 
-        // Function to start audio recording
-        startRecordingBtn.addEventListener('click', () => {
-            navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
-                mediaRecorder = new MediaRecorder(stream);
-                mediaRecorder.ondataavailable = event => audioChunks.push(event.data);
-                mediaRecorder.onstop = handleStopRecording;
-                mediaRecorder.start();
-
-                startRecordingBtn.disabled = true;
-                stopRecordingBtn.disabled = false;
-            });
-        });
-
-        // Function to stop audio recording
-        stopRecordingBtn.addEventListener('click', () => {
-            mediaRecorder.stop();
-            startRecordingBtn.disabled = false;
-            stopRecordingBtn.disabled = true;
-        });
-
-        // Function to handle audio stop and process the recorded data
-        function handleStopRecording() {
-            const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-            const audioURL = URL.createObjectURL(audioBlob);
-            audioPlayback.src = audioURL;
-            audioPlayback.style.display = 'block';
-            audioChunks = [];
-
-            uploadAudio(audioBlob);
-        }
-
-        // Function to upload audio to the server and handle the response
-        function uploadAudio(blob) {
-            const formData = new FormData();
-            formData.append('audio', blob);
-
-            loadingMessage.style.display = 'block';
-            transcriptionResult.style.display = 'none';
-            answerResult.style.display = 'none';
-
-            fetch('http://localhost:5000/transcribe', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                loadingMessage.style.display = 'none';
-
-                transcriptionText.textContent = data.transcription;
-                answerText.textContent = data.answer;
-
-                transcriptionResult.style.display = 'block';
-                answerResult.style.display = 'block';
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                loadingMessage.textContent = 'Error occurred during transcription or Q&A processing.';
-            });
-        }
-    </script>
-</body>
-</html>
+--------------------------------------------------------------------------
+Final Steps
+1. Testing the Full App
+Once both backend (localhost:5000) and frontend (localhost:3000) are running, open your browser and navigate to http://localhost:3000.
+Try recording audio and submitting it for transcription and Q&A to test the entire workflow.
+2. Troubleshooting
+If you encounter any issues with microphone permissions, ensure that the browser has access to the microphone.
+Check for console errors in the browser and in the backend terminal to debug any issues.
