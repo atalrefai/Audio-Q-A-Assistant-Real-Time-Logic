@@ -31,15 +31,15 @@ You should see the version numbers for both Node.js and npm (Node Package Manage
 
 Set Up Google Cloud Speech-to-Text API
 -
-1- Sign up or log in to the Google Cloud Console.
-2- Create a new project or use an existing project.
-3- Enable the Speech-to-Text API.
-4- Create a service account key:
-    4-1- Navigate to IAM & Admin > Service Accounts.
-    4-2- Create a new service account.
-    4-3- Under "Keys," click "Add Key" and create a new JSON key.
-    4-2- Download this JSON file and save it to the project directory (same folder as server.js).
-    4-5- Rename the file to something easy, like (xxxxxxxxxxxxxxxxxxxxxxxxxx.json) (ensure it matches the name in server.js).
++ Sign up or log in to the Google Cloud Console.
++ Create a new project or use an existing project.
++ Enable the Speech-to-Text API.
++ Create a service account key:
+  _ Navigate to IAM & Admin > Service Accounts.
+  _ Create a new service account.
+  _ Under "Keys," click "Add Key" and create a new JSON key.
+  _ Download this JSON file and save it to the project directory (same folder as server.js).
+  _ Rename the file to something easy, like (xxxxxxxxxxxxxxxxxxxxxxxxxx.json) (ensure it matches the name in server.js).
 
 Set Up OpenAI API
 -
